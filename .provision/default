@@ -1,8 +1,11 @@
 server {
     listen 80;
 
+    server_name ruhacks.com www.ruhacks.com
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
+
+    # for ref: http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite
 
     location ~* \/2017(\/)?(.*)? {
         rewrite \/2017(\/)?(.*)? /$2 break;
