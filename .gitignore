@@ -4,6 +4,7 @@
 
 ## Vagrant
 .vagrant
+Vagrantfile
 
 ## Node
 /node_modules
