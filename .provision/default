@@ -1,14 +1,16 @@
 server {
+    server_name ruhacks.com;
+    rewrite ^(.*) www.ruhacks.com permanent;
+}
+
+server {
     listen 80;
 
-    server_name ruhacks.com;
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
+    server_name 2017.ruhacks.com;
+    access_log /var/log/nginx/access-2017.log;
+    error_log /var/log/nginx/error-2017.log;
 
-    # for ref: http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite
-
-    location ~* \/2017(\/)?(.*)? {
-        rewrite \/2017(\/)?(.*)? /$2 break;
+    location / {
         proxy_pass http://localhost:7100;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -16,6 +18,14 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
+}
+
+server {
+    listen 80;
+
+    server_name www.ruhacks.com;
+    access_log /var/log/nginx/access-root.log;
+    error_log /var/log/nginx/error-root.log;
 
     location / {
         proxy_pass http://localhost:7200;
