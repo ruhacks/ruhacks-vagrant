@@ -1,6 +1,6 @@
 server {
     server_name ruhacks.com;
-    rewrite ^(.*) www.ruhacks.com permanent;
+    rewrite ^(.*) http://www.ruhacks.com permanent;
 }
 
 server {
@@ -20,19 +20,36 @@ server {
     }
 }
 
+#server {
+#    listen 80;
+
+#    server_name www.ruhacks.com;
+#    access_log /var/log/nginx/access-root.log;
+#    error_log /var/log/nginx/error-root.log;
+
+#    location / {
+#        proxy_pass http://localhost:7200;
+#        proxy_http_version 1.1;
+#        proxy_set_header Upgrade $http_upgrade;
+#        proxy_set_header Connection 'upgrade';
+#        proxy_set_header Host $host;
+#        proxy_cache_bypass $http_upgrade;
+#    }
+#}
+
+server {
+    server_name www.ruhacks.com;
+    rewrite ^(.*) http://2018.ruhacks.com permanent;
+}
+
 server {
     listen 80;
 
-    server_name www.ruhacks.com;
-    access_log /var/log/nginx/access-root.log;
-    error_log /var/log/nginx/error-root.log;
+    server_name 2018.ruhacks.com;
+    access_log /var/log/nginx/access-2018.log;
+    error_log /var/log/nginx/error-2018.log;
 
     location / {
-        proxy_pass http://localhost:7200;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        root /vagrant/2018/frontend;
     }
 }
