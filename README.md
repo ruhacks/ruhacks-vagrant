@@ -10,6 +10,7 @@ There are two machines defined in the `Vagrantfile.template`. One for deploying 
   - [Quick Start](#quick-start)
   - [Managing the nginx server](#managing-the-nginx-server)
     - [Adding applications](#adding-applications)
+    - [Issues with Running Local Copy](#issues-with-running-local-copy)
     - [Reference](#reference)
   - [Managing applications](#managing-applications)
     - [Note](#note)
@@ -62,6 +63,13 @@ Once you have setup according to the instructions above then you can do the foll
     - Go to the `Vagrantfile` and add the domain name to `config.hostmanager.aliases`
     - Run `vagrant hostmanager ruhacks-local` to update your hosts file
 3. Now you should be able to access the application on host by visiting the new domain name
+
+#### Issues with Running Local Copy
+
+There is a known issue where when static files are updated they may not show up properly when served by NGINX.
+An example of this can be found [here](https://web.archive.org/web/20130305235704/http://smotko.si/nginx-static-file-problem/).
+
+The solution is to go to the `/etc/nginx/` directory and edit the `nginx.conf` file by changing the `sendfile` option to `off`.
 
 #### Reference
 
