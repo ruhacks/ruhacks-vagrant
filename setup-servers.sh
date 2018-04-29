@@ -57,7 +57,7 @@ fi
 
 ## --- Application startup --- ###
 # check that the pm2 is installed
-if [ `command -v pm2` != '' ]; then
+#if [ `command -v pm2` != '' ]; then
   #cd /vagrant/2017
 
   #echo 'Starting up 2017 server using pm2'
@@ -67,4 +67,4 @@ if [ `command -v pm2` != '' ]; then
 
   #echo 'Starting up Hackers server using pm2'
   #sudo pm2 start start.sh --name hackersClient
-fi
+#fi
