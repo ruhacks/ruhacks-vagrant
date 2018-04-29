@@ -37,7 +37,13 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 ## uncomment this section only if you cannot run this script in admin/superuser mode ##
 ## sudo npm install -g sympm
 
+## --- Install Serve --- ##
+sudo npm install -g serve
+
+## --- Set up the application servers --- ##
 cd /vagrant
 sudo ./setup-servers.sh
 
+## --- Freeze applications currently running in PM2 --- ##
+## This allows for the applications to start up on server startup ##
 sudo pm2 startup
