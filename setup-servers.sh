@@ -35,25 +35,25 @@ fi
 
 ## --- 2018 --- ###
 # check that the 2018 dir doesn't exist
-if [ ! -d 'hackers' ]; then
-  cd /vagrant
-  mkdir hackers
+#if [ ! -d 'hackers' ]; then
+#  cd /vagrant
+#  mkdir hackers
 
-  echo 'Grabbing hacker repo from Github'
-  sudo git clone https://github.com/ruhacks/hacker-application hackers
+#  echo 'Grabbing hacker repo from Github'
+#  sudo git clone https://github.com/ruhacks/hacker-application hackers
 
   #echo 'Creating copy of .env.template and renaming to .env'
   #sudo cp /vagrant/2018/.env.template /vagrant/2018/.env
 
-  if [ `command -v npm` != '' ]; then
-    cd /vagrant/hackers
+#  if [ `command -v npm` != '' ]; then
+#    cd /vagrant/hackers
 
-    echo 'Installing node modules'
-    sudo npm install
-  fi
+#    echo 'Installing node modules'
+#    sudo npm install
+#  fi
 
-  echo 'Please add in `firebase.json` to the Hackers applciation for it to run'
-fi
+#  echo 'Please add in `firebase.json` to the Hackers applciation for it to run'
+#fi
 
 ## --- Application startup --- ###
 # check that the pm2 is installed
