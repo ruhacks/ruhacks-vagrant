@@ -23,7 +23,11 @@ sudo systemctl restart nginx
 sudo ufw allow 'Nginx Full'
 sudo ufw enable
 
-## --- Install NodeJS v6.x --- ###
+## --- Install PostgreSQL --- ##
+sudo apt-get install postgresql postgresql-contrib
+sudo -u postgres createuser -s root
+
+## --- Install NodeJS v8.x --- ##
 sudo curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 sudo apt-get install -y nodejs

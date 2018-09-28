@@ -117,3 +117,9 @@ If the need arises we'll look into setting up FTP/SFTP or some other method on p
 ## Issues
 
 Submit an issue if anything does not behave as expected.
+
+## NOTES
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
+https://stackoverflow.com/questions/11192134/connect-to-a-db-using-psycopg2-without-password
+scp -r -i /c/.ssh/di_rsa admin/bower_components root@ruhacks.com:/vagrant/admin

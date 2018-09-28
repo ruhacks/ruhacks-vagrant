@@ -3,6 +3,28 @@ server {
     rewrite ^(.*) http://www.ruhacks.com permanent;
 }
 
+#server {
+#    listen 80;
+
+#    server_name www.ruhacks.com;
+#    access_log /var/log/nginx/access-root.log;
+#    error_log /var/log/nginx/error-root.log;
+
+#    location / {
+#        proxy_pass http://localhost:7200;
+#        proxy_http_version 1.1;
+#        proxy_set_header Upgrade $http_upgrade;
+#        proxy_set_header Connection 'upgrade';
+#        proxy_set_header Host $host;
+#        proxy_cache_bypass $http_upgrade;
+#    }
+#}
+
+server {
+    server_name www.ruhacks.com;
+    rewrite ^(.*) http://2018.ruhacks.com permanent;
+}
+
 server {
     listen 80;
 
@@ -12,6 +34,43 @@ server {
 
     location / {
         proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name admin.ruhacks.com;
+    access_log /var/log/nginx/access-admin.log;
+    error_log /var/log/nginx/error-admin.log;
+
+    auth_basic "Administrator Area";
+    auth_basic_user_file /.htpasswd;
+
+    location / {
+        proxy_pass http://localhost:5200;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name judging.ruhacks.com;
+    access_log /var/log/nginx/access-judging.log;
+    error_log /var/log/nginx/error-judging.log;
+
+    location / {
+        proxy_pass http://localhost:5400;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -40,28 +99,6 @@ server {
     #}
 }
 
-#server {
-#    listen 80;
-
-#    server_name www.ruhacks.com;
-#    access_log /var/log/nginx/access-root.log;
-#    error_log /var/log/nginx/error-root.log;
-
-#    location / {
-#        proxy_pass http://localhost:7200;
-#        proxy_http_version 1.1;
-#        proxy_set_header Upgrade $http_upgrade;
-#        proxy_set_header Connection 'upgrade';
-#        proxy_set_header Host $host;
-#        proxy_cache_bypass $http_upgrade;
-#    }
-#}
-
-server {
-    server_name www.ruhacks.com;
-    rewrite ^(.*) http://2018.ruhacks.com permanent;
-}
-
 server {
     listen 80;
 
@@ -70,6 +107,6 @@ server {
     error_log /var/log/nginx/error-2018.log;
 
     location / {
-        root /vagrant/2018/frontend;
+        root /vagrant/2018;
     }
 }

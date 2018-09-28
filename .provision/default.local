@@ -3,43 +3,6 @@ server {
     rewrite ^(.*) http://www.ruhacks.local permanent;
 }
 
-server {
-    listen 80;
-
-    server_name hackers.ruhacks.local;
-    access_log /var/log/nginx/access-hackers.log;
-    error_log /var/log/nginx/error-hackers.log;
-
-    location / {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-
-server {
-    server_name 2017.ruhacks.local;
-    rewrite ^(.*) http://2018.ruhacks.local permanent;
-
-    #listen 80;
-
-    #server_name 2017.ruhacks.local;
-    #access_log /var/log/nginx/access-2017.log;
-    #error_log /var/log/nginx/error-2017.log;
-
-    #location / {
-    #    proxy_pass http://localhost:7100;
-    #    proxy_http_version 1.1;
-    #    proxy_set_header Upgrade $http_upgrade;
-    #    proxy_set_header Connection 'upgrade';
-    #    proxy_set_header Host $host;
-    #    proxy_cache_bypass $http_upgrade;
-    #}
-}
-
 #server {
 #    listen 80;
 
@@ -65,11 +28,112 @@ server {
 server {
     listen 80;
 
+    server_name hackers.ruhacks.local;
+    access_log /var/log/nginx/access-hackers.log;
+    error_log /var/log/nginx/error-hackers.log;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name admin.ruhacks.local;
+    access_log /var/log/nginx/access-admin.log;
+    error_log /var/log/nginx/error-admin.log;
+
+    auth_basic "Administrator Area";
+    auth_basic_user_file /.htpasswd;
+
+    location / {
+        proxy_pass http://localhost:5200;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name judging.ruhacks.local;
+    access_log /var/log/nginx/access-judging.log;
+    error_log /var/log/nginx/error-judging.log;
+
+    location / {
+        proxy_pass http://localhost:5400;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name tracking.ruhacks.local;
+    access_log /var/log/nginx/access-tracking.log;
+    error_log /var/log/nginx/error-tracking.log;
+
+    location /api {
+        proxy_pass http://localhost:6500;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+    }
+}
+
+server {
+    server_name 2017.ruhacks.local;
+    rewrite ^(.*) http://2018.ruhacks.local permanent;
+
+    #listen 80;
+
+    #server_name 2017.ruhacks.local;
+    #access_log /var/log/nginx/access-2017.log;
+    #error_log /var/log/nginx/error-2017.log;
+
+    #location / {
+    #    proxy_pass http://localhost:7100;
+    #    proxy_http_version 1.1;
+    #    proxy_set_header Upgrade $http_upgrade;
+    #    proxy_set_header Connection 'upgrade';
+    #    proxy_set_header Host $host;
+    #    proxy_cache_bypass $http_upgrade;
+    #}
+}
+
+server {
+    listen 80;
+
     server_name 2018.ruhacks.local;
     access_log /var/log/nginx/access-2018.log;
     error_log /var/log/nginx/error-2018.log;
 
     location / {
-        root /vagrant/2018/frontend;
+        root /vagrant/2018;
     }
 }
